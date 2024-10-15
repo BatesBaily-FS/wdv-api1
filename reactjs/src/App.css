@@ -119,10 +119,31 @@ body {
   z-index: 2;
 }
 
+.pic-container {
+  position: relative;
+  height: 35vh;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.backgroundPic {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  width: 165vh;
+  height: auto;
+  opacity: 0.3;
+  z-index: 0;
+}
+
 .main-h1 {
-  padding-top: 20px;
   text-align: center;
   font-size: 2.5rem;
+  margin-top: -200px;
+  position: relative;
+  z-index: 1;
+  padding: 15px 0;
 }
 
 .main-dash {
@@ -142,6 +163,8 @@ body {
   margin: 0 auto;
   margin-top: 40px;
   border-radius: 10%;
+  font-weight: bold;
+  z-index: 2;
 }
 
 .item-list li {
@@ -312,7 +335,7 @@ p {
   font-size: 1.2rem;
 }
 
-.App-link {
+.backgroundPic .App-link {
   color: #61dafb;
 }
 

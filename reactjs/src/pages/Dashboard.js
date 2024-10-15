@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import shoppingLogo from "../components/shopping-logo.png";
+// import backgroundPic1 from "../components/avocado.png";
+// import backgroundPic2 from "../components/bread3.jpg";
+// import backgroundPic3 from "../components/egg-pic.webp";
+// import backgroundPic4 from "../components/strawberry.jpeg";
+// import backgroundPic4 from "../components/strawberry.jpeg";
+import backgroundPic from "../components/food-removebg.png";
 
 function Dashboard() {
   const [items, setItems] = useState([]);
@@ -90,6 +96,13 @@ function Dashboard() {
         </div>
       </header>
       <main className="main-dash">
+        <div className="pic-container">
+          <img
+            src={backgroundPic}
+            alt="food-falling"
+            className="backgroundPic"
+          />
+        </div>
         <h1 className="main-h1"> Shopping List Items</h1>
         {loading && <p>Loading...</p>}
         {error && <p className="error-message">{error}</p>}
