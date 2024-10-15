@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import "../App.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import shoppingLogo from "../components/shopping-logo.png";
+import "../App.css";
 
-function Dashboard() {
-  const [items, setItems] = useState([]);
+function Item() {
+  const [items, setItems] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
   const [values, setValues] = useState({
     name: "",
     class: "",
   });
 
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const API_BASE =
@@ -22,7 +24,7 @@ function Dashboard() {
   let ignore = false;
   useEffect(() => {
     if (!ignore) {
-      getItems();
+      getItem();
     }
 
     return () => {
@@ -30,14 +32,21 @@ function Dashboard() {
     };
   }, []);
 
-  const getItems = async () => {
+  const getItem = async () => {
     setLoading(true);
-    setError(null);
     try {
-      const response = await fetch(`${API_BASE}/items`);
+      const response = await fetch(`${API_BASE}/items/${id}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
-      console.log(data);
-      setItems(data);
+      console.log({ data });
+      setValues({
+        name: data.name,
+        quantity: data.quantity,
+        store: data.store,
+        price: data.price,
+      });
     } catch (error) {
       setError(error.message || "Unexpected Error");
     } finally {
@@ -45,16 +54,43 @@ function Dashboard() {
     }
   };
 
-  const createItem = async () => {
+  const deleteItem = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE}/items`, {
-        method: "POST",
+      const response = await fetch(`${API_BASE}/items/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setItems(data);
+      navigate("/dashboard", { replace: true });
+    } catch (error) {
+      setError(error.message || "Unexpected Error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateItem = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_BASE}/items/${id}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      }).then(() => getItems());
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setItems(data);
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       setError(error.message || "Unexpected Error");
     } finally {
@@ -64,7 +100,7 @@ function Dashboard() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createItem();
+    updateItem();
   };
 
   const handleInputChanges = (event) => {
@@ -76,35 +112,36 @@ function Dashboard() {
   };
 
   return (
-    <div className="dashboard">
+    <div className="itemPage">
       <header className="header-2">
         <div className="logo">
           <img className="logoImg" src={shoppingLogo} alt="shopping-logo" />
           <h3>Shopping Buddy</h3>
         </div>
-        <div className="header-links">
+        <div className="nav">
           <Link to="/">Home</Link>
           <Link to="/dashboard" className="home-link">
             Dashboard
           </Link>
         </div>
       </header>
-      <main className="main-dash">
-        <h1 className="main-h1"> Shopping List Items</h1>
-        {loading && <p>Loading...</p>}
-        {error && <p className="error-message">{error}</p>}
-        <ul className="item-list">
-          {items.map((item) => (
-            <li key={item._id}>
-              <Link style={{ color: "#551a8b" }} to={`/items/${item._id}`}>
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <form onSubmit={(event) => handleSubmit(event)} className="item-form">
-          <div className="form-row">
-            <div className="form-group">
+      <main className="Item-main">
+        <h1 className="item-heading">Items To Buy</h1>
+        <div className="itemInfo">
+          <h5 className="itemName">{values && values.name}</h5>
+          <h6 className="label">Quantity:</h6>
+          <p>{values && values.quantity}</p>
+          <h6 className="label">Store:</h6>
+          <p>{values && values.store}</p>
+          <h6 className="label">Price:</h6>
+          <p>{values && values.price}</p>
+          <button onClick={() => deleteItem()} className="delete-button">
+            Delete Item
+          </button>
+        </div>
+        <form onSubmit={(event) => handleSubmit(event)} className="item-form2">
+          <div className="form-row2">
+            <div className="form-group2">
               <label>
                 Name:
                 <input
@@ -115,7 +152,7 @@ function Dashboard() {
                 />
               </label>
             </div>
-            <div className="form-group">
+            <div className="form-group2">
               <label>
                 Quantity:
                 <input
@@ -127,8 +164,8 @@ function Dashboard() {
               </label>
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="form-row2">
+            <div className="form-group2">
               <label>
                 Store:
                 <input
@@ -139,7 +176,7 @@ function Dashboard() {
                 />
               </label>
             </div>
-            <div className="form-group">
+            <div className="form-group2">
               <label>
                 Price:
                 <input
@@ -151,7 +188,6 @@ function Dashboard() {
               </label>
             </div>
           </div>
-          <input type="submit" value="Submit" className="submit-button" />
         </form>
       </main>
       <footer>@ 2024 Shopping Buddy</footer>
@@ -159,4 +195,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Item;

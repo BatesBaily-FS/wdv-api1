@@ -1,10 +1,46 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -15px;
+  padding: 10px;
+  gap: 300px;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-2 {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -15px;
+  padding: 15px;
+  gap: 300px;
+  background-color: #cabfbf;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.logoImg {
+  height: 60px;
+  width: 60px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,15 +49,267 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
+/* Home Page */
+
+.backgroundImg {
+  width: 100%;
+  height: 90vh;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(150, 127, 127, 0.5);
+  z-index: 1;
+}
+
+.home-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: #4b4040;
+}
+
+.home-heading {
+  font-size: 3rem;
+  width: 500px;
+  text-align: center;
+  background-color: #faf9f6;
+  padding: 25px;
+  border-radius: 45%;
+}
+
+.home-p {
+  font-weight: bold;
+  font-size: 1.75rem;
+  text-align: center;
+  background-color: #faf9f6;
+  padding: 15px;
+  border-radius: 5%;
+}
+
+.home-link {
+  padding-left: 15px;
+}
+
+/* Dashboard Page */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #faf9f6;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.main-h1 {
+  padding-top: 20px;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.main-dash {
+  flex: 1;
+  padding-bottom: 60px;
+}
+
+.item-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.3rem;
+  background-color: #c77872;
+  max-width: 300px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-radius: 10%;
+}
+
+.item-list li {
+  margin: "5px 0";
+}
+
+.item-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5%;
+  width: 500px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 40px;
+  background-color: #cabfbf;
+}
+
+.form-row {
+  display: flex;
+  max-width: 600px;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 0;
+  margin-bottom: -30px;
+}
+
+.form-group:last-child {
+  margin-right: 0;
+}
+
+.form-group label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.item-form input[type="text"],
+.item-form input[type="number"] {
+  margin-bottom: 10px;
+  width: 200px;
+  height: 30px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-button {
+  margin-top: 30px;
+  padding: 12px 30px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: black;
+  border: 1px solid black;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+  margin: 10px 0;
+}
+
+footer {
+  text-align: center;
+}
+
+/* Item Page */
+
+.itemPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #faf9f6;
+}
+
+.Item-main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  color: #4b4040;
+}
+
+.item-heading {
+  font-size: 3rem;
+}
+
+.itemName {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: -5px;
+}
+
+.label {
+  margin-top: 5px;
+}
+
+p {
+  margin-top: 0;
+}
+
+.delete-button {
+  padding: 8px 10px;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: black;
+  border: 1px solid black;
+}
+
+.delete-button:hover {
+  background-color: #45a049;
+}
+
+.item-form2 {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5%;
+  width: 400px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 40px;
+  background-color: #cabfbf;
+  align-items: center;
+}
+
+.form-row2 {
+  display: flex;
+  max-width: 600px;
+  margin-top: 15px;
+  align-items: center;
+}
+
+.form-group2 {
+  margin-right: 0;
+}
+
+.form-group2 label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 .App-link {
