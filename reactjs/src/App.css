@@ -121,7 +121,7 @@ body {
 
 .pic-container {
   position: relative;
-  height: 35vh;
+  height: 25vh;
   overflow: hidden;
   margin-top: 15px;
 }
@@ -140,7 +140,7 @@ body {
 .main-h1 {
   text-align: center;
   font-size: 2.5rem;
-  margin-top: -200px;
+  margin-top: -140px;
   position: relative;
   z-index: 1;
   padding: 15px 0;
