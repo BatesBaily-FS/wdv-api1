@@ -1,5 +1,5 @@
 # GET ALL REQUEST
-GET http://localhost:8000/students
+GET http://localhost:8000/items
 
 
 ###

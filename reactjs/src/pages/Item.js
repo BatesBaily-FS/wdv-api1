@@ -185,7 +185,6 @@ function Item() {
                   value={values.price}
                   onChange={handleInputChanges}
                 />
-              </label>
             </div>
           </div>
         </form>
